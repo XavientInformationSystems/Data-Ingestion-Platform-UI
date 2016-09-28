@@ -1,0 +1,119 @@
+ buildscript {
+ 
+    repositories {
+		maven { url 'http://repo.springsource.org/plugins-release' }
+	}
+	
+	dependencies {
+     classpath('org.springframework.build.gradle:propdeps-plugin:0.0.5')
+     classpath 'io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE'
+     classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE'
+   }
+   
+}
+
+configure(allprojects) { project ->
+	group = 'com.xavient'
+	description = 'DataIngest UI'
+	version = qualifyVersionIfNecessary(version)
+
+    ext.env                  = buildEnvironment() 
+    ext.springBootVersion    = '1.3.3.RELEASE'
+	ext.springCloudVersion   = '1.0.6.RELEASE'
+	ext.slf4jVersion         = '1.7.5'
+	ext.xstreamVersion       = '1.4.6'
+	ext.gradleScriptDir   = "${rootProject.projectDir}/gradle"
+
+	apply plugin: 'java'
+	apply plugin: 'propdeps'
+	apply plugin: 'spring-boot'
+	apply plugin: 'io.spring.dependency-management'
+	apply from  : "${gradleScriptDir}/ide.gradle"
+	apply from  : "${gradleScriptDir}/${env}.gradle"
+
+	compileJava.options*.compilerArgs = [
+		'-Xlint:serial', '-Xlint:varargs', '-Xlint:cast', '-Xlint:classfile',
+		'-Xlint:dep-ann', '-Xlint:divzero', '-Xlint:empty', '-Xlint:finally',
+		'-Xlint:overrides', '-Xlint:path', '-Xlint:processing', '-Xlint:static',
+		'-Xlint:try', '-Xlint:fallthrough', '-Xlint:rawtypes', '-Xlint:deprecation',
+		'-Xlint:unchecked', '-Xlint:-options', '-Werror'
+	]
+
+	compileTestJava.options*.compilerArgs = [
+		'-Xlint:serial', '-Xlint:varargs', '-Xlint:cast', '-Xlint:classfile',
+		'-Xlint:dep-ann', '-Xlint:divzero', '-Xlint:empty', '-Xlint:finally',
+		'-Xlint:overrides', '-Xlint:path', '-Xlint:processing', '-Xlint:static',
+		'-Xlint:try', '-Xlint:-fallthrough', '-Xlint:-rawtypes', '-Xlint:-deprecation',
+		'-Xlint:-unchecked', '-Xlint:-options']
+
+	compileJava {
+		sourceCompatibility=1.7
+		targetCompatibility=1.7
+	}
+
+	compileTestJava {
+		sourceCompatibility=1.7
+		targetCompatibility=1.7
+	}
+
+	sourceSets.test.resources.srcDirs = ['src/test/resources', 'src/test/java']
+
+	test {
+		systemProperty('java.awt.headless', 'true')
+		systemProperty('testGroups', project.properties.get('testGroups'))
+		scanForTestClasses = false
+		include(['**/*Tests.class', '**/*Test.class'])
+		// Since we set scanForTestClasses to false, we need to filter out inner
+		// classes with the '$' pattern; otherwise, using -Dtest.single=MyTests to
+		// run MyTests by itself will fail if MyTests contains any inner classes. 
+		exclude(['**/Abstract*.class', '**/*$*'])
+	}
+
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+	
+	dependencies {
+      compile 'commons-io:commons-io:2.4'
+      compile 'org.apache.kafka:kafka_2.9.2:0.8.1.1'
+      compile 'net.sourceforge.nekohtml:nekohtml:1.9.22'
+      compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
+      compile 'org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE'
+      compile "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
+   }
+   
+   bootRun {
+	       addResources = true
+	     }
+	     
+    tasks.withType(JavaCompile){
+    options.warnings = false
+}
+
+}
+
+def buildEnvironment() {
+  def env=System.getProperty('esykart.build.profile')!=null 
+                   ? System.getProperty('esykart.build.profile')
+                   :System.getenv('ESYKART_BUILD_PROFILE')
+  return env!=null?env:'dev'
+}
+
+/*
+ * Support publication of artifacts versioned by topic branch.
+ * CI builds supply `-P BRANCH_NAME=<TOPIC>` to gradle at build time.
+ * If <TOPIC> starts with 'SPR-', change version
+ *     from BUILD-SNAPSHOT => <TOPIC>-SNAPSHOT
+ *     e.g. 3.2.1.BUILD-SNAPSHOT => 3.2.1.SPR-1234-SNAPSHOT
+ */
+ 
+def qualifyVersionIfNecessary(version) {
+	if (rootProject.hasProperty('BRANCH_NAME')) {
+		def qualifier = rootProject.getProperty('BRANCH_NAME')
+		if (qualifier.startsWith('SPR-')) {
+			return version.replace('BUILD', qualifier)
+		}
+	}
+	return version
+}
