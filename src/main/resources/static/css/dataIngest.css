@@ -1,0 +1,40 @@
+body{background:#ececec;padding:0px;margin:0px;font-family:Arial, Helvetica, sans-serif;font-size:14px;}
+.container{background:#fff; margin:0px auto; width:1000px;border:0px solid #cdcdcd;}
+.header-bg{background:#fdf8f8; padding:15px;clear:both;height:90px;}
+.flt-left{float:left;display:inline-block;}
+.flt-right{float:right;display:inline-block;}
+.txt-center{text-align:center;}
+.txt-red{color:#841618;font-weight:bold;font-size:16px;line-height:30px;}
+.txt-center div a:link, .txt-center div a:visited, .txt-center div a:active {color:#262525;text-decoration:none;padding:0px 5px;line-height:20px;font-size:12px;font-weight:bold;cursor:default;}
+.txt-center div a:hover {color:#262525;text-decoration:none;padding:0px 5px;cursor:default;}
+
+.formContent{background:#fff;min-height:570px;}
+.width-75{width:74%; border-right:1px solid #ededed;}
+.width-25{width:25%;text-align:left;}
+.txt-heading{color:#262525;font-weight:bold;font-size:15px;padding:30px 15px 10px 15px;}
+.txt-right-nav{padding-left:0px;color:#841618;border-bottom:1px solid #841618;margin:0px 20px;}
+ul.useful-link h4{font-size:13px; font-weight:bold;color:#2e2e2e;margin: 15px 0px 5px 0px;}
+ul.useful-link {padding:0px; margin:0px; list-style-type:none;margin-left:20px;}
+ul.useful-link li{padding:0px; margin:0px 20px; list-style-type:disc;line-height:20px;font-size:13px;}
+ul.useful-link li a:link, ul.useful-link li a:visited, .streming-tab a:active, ul.useful-link li a:active{color:#262525;text-decoration:none;}
+ul.useful-link li a:hover{color:#000;text-decoration:underline;}
+.txt-or{line-height: 295px;  width: 40px; font-weight: bold;color:#cdcdcd;}
+.streming-tab a:link, .streming-tab a:visited, .streming-tab a:hover {color:#262525;text-decoration:none;padding:5px 25px;line-height:20px;font-size:12px;border:1px solid #d8d8d8;background:#ededed;margin:0px 0px 0px 15px;border-radius:5px;display:inline-block;text-transform:uppercase;cursor:default;}
+ .streming-tab a.active {color:#000;text-decoration:none;margin:0px 0px 0px 15px;border-radius:5px;border:1px solid #b7defe;background:#e7f4fe;}
+.btn-upload-pading{text-align:center;}
+ #fileData{background:transparent;border:0px;}
+.width-60{width:45%;}
+.width-30{width:35%;text-align:left;margin-right:10%;}
+.txtareaBox{margin-left:15px;}
+.txtareaBox textarea{padding:5px;border:1px solid #d8d8d8;border-radius:5px;width:100%;height:170px;}
+
+.uploadFileBox{border:1px dotted #f3bebf; background:#fdf8f8;height:170px;border-radius:5px;padding:5px;text-align: center;}
+.uploadFileBox img{margin-top:20px;}
+.btn-green{padding:0px 0px;border:0px;border-radius:5px;color:#000;margin-top:15px;}
+.lft-padding{padding-left:0px;}
+.btn-red{background:#841618;padding:10px 20px;border:0px;border-radius:5px;color:#fff;}
+.dividerLine{background:#ededed;line-height:1px;height:1px;overflow:hidden;margin:20px 15px;}
+
+
+.modal-dialog{margin-top:100px;width:400px;}
+.modal-dialog h4{color:#262525;font-weight:bold;font-size:15px;line-height:35px;}

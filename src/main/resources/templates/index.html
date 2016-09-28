@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Data Ingest UI</title>
+  <link rel="stylesheet" type="text/css" th:href="@{css/dataIngest.css}" media="screen" />
+  <script th:src="@{js/jquery-3.1.0.min.js}"></script>
+  <script th:src="@{js/dataIngest.js}"></script>
+</head>
+<body bgcolor="#3B5998">
+	<div align="center">
+		<h1 align="center">DATA INGESTION PLATFORM</h1>
+		<h2 align="center">STORM|SPARK-STREAMING|FLINK|APEX</h2>
+		<br /> <br /> <br />
+		<div>
+	      <span id="streamingPlatformError" class="error"></span>
+	    </div>
+		<h2 align="center">Choose Streaming Platform</h2>
+			<input type="radio" name="streamingPlatform" value="STORM"><span style="color: white;" >STORM</span> &nbsp;&nbsp;
+			<input type="radio" name="streamingPlatform" value="FLINK"/><span style="color: white;" >FLINK</span> &nbsp;&nbsp;
+			<input type="radio" name="streamingPlatform" value="APEX"/><span style="color: white;" >APEX</span> &nbsp;&nbsp;
+			<input type="radio" name="streamingPlatform" value="SPARK"/><span style="color: white;" >SPARK</span> 
+			<br> <br>
+		<form action="ingestText" method="post" id="ingestTextForm">
+			<h2>Enter JSON/XML Message</h2>
+			<br>
+			<div>
+	           <span id="textDataError" class="error"></span>
+	        </div>
+			<textarea rows="10" cols="150" name="data" id="textData"> </textarea>
+			<br> <br> 
+			<button class="data-submit a" type="button" upload-data="ingestTextForm">Submit</button>
+		</form>
+
+		<br /> <br /> <br />
+		<h2>Upload File</h2>
+		<br />
+		<form action="ingestFile" method="post"
+			enctype="multipart/form-data" id="ingestFileForm">
+			<div>
+	           <span id="fileDataError" class="error"></span>
+	        </div>
+			<input type="file" id="fileData" name="file" size="50" class="a" /> 
+			<br> <br> 
+			<button class="data-submit a" type="button" upload-data="ingestFileForm">Upload File</button>
+		</form>
+	</div>
+</body>
+</html>

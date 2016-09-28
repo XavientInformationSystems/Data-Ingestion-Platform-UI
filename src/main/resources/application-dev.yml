@@ -1,0 +1,27 @@
+server:
+  port: ${port:8080}
+  context-path: /DataIngestUI
+  session:
+    timeout: 10
+  error:
+    include-stacktrace: always
+ 
+spring:
+  main: 
+    web-environment: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  thymeleaf: 
+    mode: LEGACYHTML5    
+
+multipart: 
+  maxFileSize: 13Mb   
+  maxRequestSize: 15Mb
+
+logging:
+  level:
+    com.xavient: INFO
+    org.springframework.boot: INFO
+    
+        
+  

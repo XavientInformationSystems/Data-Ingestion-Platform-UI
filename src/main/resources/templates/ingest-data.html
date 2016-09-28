@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Data Ingest UI</title>
+<link type="text/css" th:href="@{css/bootstrap.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{css/dataIngest.css}"
+	media="screen" />
+<script th:src="@{js/jquery-3.1.0.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/dataIngest.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<!-- Header Start -->
+		<div class="header-bg">
+			<div class="flt-right txt-center">
+				<div class="txt-red">Data Ingestion Platform</div>
+				<div>
+					<a href="#">Storm</a>|<a href="#">Spark-Streaming</a>|<a href="#">Flink</a>|<a
+						href="#">Apex</a>
+				</div>
+			</div>
+			<div class="flt-left">
+				<img th:src="@{images/XavientLogo.png}"
+					src="../static/images/XavientLogo.png" width="160" alt="Xavient" />
+			</div>
+		</div>
+		<!-- Header Start -->
+		<!-- Body Content Start -->
+
+		<div class="formContent">
+			<form action="ingestText" method="post" id="ingestData">
+				<div class="flt-right width-25">
+					<div class="txt-heading txt-right-nav">Useful Links</div>
+					<ul class="useful-link">
+						<h4>Storm</h4>
+						<li><a
+							href="https://github.com/XavientInformationSystems/Data-Ingestion-Platform/tree/master/dataingest-storm">Github</a></li>
+						<li><a href="https://techblog.xavient.com/?p=103">Blog</a></li>
+					</ul>
+					<ul class="useful-link">
+						<h4>Spark-Streaming</h4>
+						<li><a
+							href="https://github.com/XavientInformationSystems/Data-Ingestion-Platform/tree/master/dataingest-spark">Github</a></li>
+						<li><a href="https://techblog.xavient.com/?p=43">Blog</a></li>
+					</ul>
+					<ul class="useful-link">
+						<h4>Flink</h4>
+						<li><a
+							href="https://github.com/XavientInformationSystems/Data-Ingestion-Platform/tree/master/dataingest-flink">Github</a></li>
+						<li><a href="https://techblog.xavient.com/?p=89">Blog</a></li>
+					</ul>
+					<ul class="useful-link">
+						<h4>Apex</h4>
+						<li><a
+							href="https://github.com/XavientInformationSystems/Data-Ingestion-Platform/tree/master/dataingest-apex">Github</a></li>
+						<li><a href="https://techblog.xavient.com/?p=41">Blog</a></li>
+					</ul>
+				</div>
+				<div class="flt-left width-75">
+				    
+					<div class="txt-heading">Choose Streaming Platform</div>
+					<div class="streming-tab">
+						<a href="#" class="active">Storm</a><a href="#">Flink</a><a
+							href="#">Apex</a><a href="#">Spark</a>
+					</div>
+					<div class="flt-right width-30">
+						<div class="txt-heading lft-padding">Upload File</div>
+						<div class="uploadFileBox">
+							<img th:src="@{images/upload-file.png}"
+								src="../static/images/upload-file.png" width="200" height="125">
+						</div>
+						<div class="btn-upload-pading btn-green">
+							<input type="file" id="fileData" name="file" size="50" class="" />
+						</div>
+
+					</div>
+					<div class="flt-right txt-or">OR</div>
+					<div class="flt-left width-60">
+						<div class="txt-heading">Enter JSON/XML</div>
+						<div class="txtareaBox">
+							<textarea class="form-control" rows="11" name="data"
+								id="textData"></textarea>
+						</div>
+					</div>
+					<br clear="all">
+					<div class="dividerLine"></div>
+					<br clear="all">
+					<div class="txt-center">
+						<button type="button" class="btn-red data-submit">SUBMIT</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- Body Content End -->
+
+	</div>
+
+<!-- Modal Start -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" onclick="" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<span id="successMsg" style="color: green;" th:text="${success}"></span>
+			        <span id="serverError" style="color: red;"  th:text="${error}"></span>
+			        <span id="validationError" style="color: red"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End -->
+
+
+</body>
+</html>
